@@ -6,6 +6,9 @@ default_config:
 frontend:
   themes: !include_dir_merge_named themes
 
+shell_command:
+  git_pull_config: "git -C /config pull --rebase"
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml

@@ -28,3 +28,10 @@ hello:
     target:
       entity_id: scene.i_m_home
   mode: single
+git_pull_and_reload:
+  alias: Git Pull & Reload YAML
+  sequence:
+  - service: shell_command.git_pull_config
+  - delay: "00:00:02"
+  - service: homeassistant.reload_all
+  mode: single

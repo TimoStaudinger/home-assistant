@@ -1,0 +1,6 @@
+### Git Pull & Reload (Home Assistant)
+POST {{host}}/api/services/script/git_pull_and_reload
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{}

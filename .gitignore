@@ -42,6 +42,7 @@ zigbee2mqtt/
 *.swp
 *.swo
 *~
+http-client.env.json
 
 # OS files
 .DS_Store
