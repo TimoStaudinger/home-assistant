@@ -12,3 +12,8 @@ shell_command:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+logger:
+  default: info
+  logs:
+    homeassistant.components.shell_command: debug
