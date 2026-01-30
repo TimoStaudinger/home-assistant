@@ -1,0 +1,48 @@
+# Secrets and sensitive data
+secrets.yaml
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Log files
+*.log
+home-assistant.log*
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Home Assistant internal files
+.cloud/
+.storage/
+.uuid
+.HA_VERSION
+known_devices.yaml
+deps/
+tts/
+
+# Runtime/lock files
+*.bak
+.ha_run.lock
+
+# Custom components (managed by HACS or manually installed)
+custom_components/
+
+# UI Lovelace Minimalist files
+ui_lovelace_minimalist/
+
+# Zigbee2MQTT files
+zigbee2mqtt/
+
+# IDE/Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db

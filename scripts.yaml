@@ -1,0 +1,30 @@
+goodbye:
+  alias: Goodbye
+  sequence:
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.i_m_leaving
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.i_m_gone
+  mode: single
+hello:
+  alias: Hello
+  sequence:
+  - service: script.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: script.goodbye
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.i_m_home
+  mode: single
