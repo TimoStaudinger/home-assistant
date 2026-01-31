@@ -22,7 +22,6 @@ views:
                   action: call-service
                   service: script.goodbye
           - type: entities
-            title: Presence
             show_header_toggle: false
             entities:
               - entity: person.timo
