@@ -17,6 +17,8 @@ views:
             entity: light.bedroom_light
           - type: light
             entity: light.bedside_light
+          - type: light
+            entity: light.elgato_key_light_808f
       - type: vertical-stack
         title: Hallway
         cards:
