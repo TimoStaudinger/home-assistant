@@ -6,6 +6,15 @@ default_config:
 frontend:
   themes: !include_dir_merge_named themes
 
+lovelace:
+  mode: yaml
+  dashboards:
+    lovelace-home:
+      mode: yaml
+      filename: lovelace/home.yaml
+      title: Home
+      icon: mdi:home
+
 shell_command:
   git_pull_config: "git -C /config pull --rebase"
 
