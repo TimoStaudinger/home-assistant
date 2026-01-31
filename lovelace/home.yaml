@@ -5,16 +5,30 @@ views:
     cards:
       - type: vertical-stack
         title: Living Room
-        cards: []
+        cards:
+          - type: light
+            entity: light.living_room
+          - type: light
+            entity: light.living_room_light_floor
       - type: vertical-stack
         title: Bedroom
-        cards: []
+        cards:
+          - type: light
+            entity: light.bedroom_light
+          - type: light
+            entity: light.bedside_light
       - type: vertical-stack
         title: Hallway
-        cards: []
+        cards:
+          - type: light
+            entity: light.hallway
       - type: vertical-stack
         title: Kitchen
-        cards: []
+        cards:
+          - type: light
+            entity: light.kitchen_light
       - type: vertical-stack
         title: Bathroom
-        cards: []
+        cards:
+          - type: light
+            entity: light.bathroom_light
