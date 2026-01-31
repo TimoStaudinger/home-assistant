@@ -2,6 +2,7 @@ views:
   - title: Home New
     path: home-new
     icon: mdi:home-outline
+    type: panel
     cards:
       - type: grid
         columns: 3
