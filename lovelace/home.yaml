@@ -53,7 +53,6 @@ views:
           - type: media-control
             entity: media_player.apple_tv
           - type: entities
-            title: Media
             show_header_toggle: false
             entities:
               - entity: media_player.living_room

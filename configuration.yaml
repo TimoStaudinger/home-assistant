@@ -8,9 +8,6 @@ frontend:
 
 lovelace:
   mode: yaml
-  resources:
-    - url: /local/mini-media-player-bundle.js?v=1.16.10
-      type: module
   dashboards:
     lovelace-home:
       mode: yaml
