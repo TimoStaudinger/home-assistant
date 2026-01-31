@@ -22,11 +22,6 @@ homekit:
       - script.hello
       - script.goodbye
 
-device_tracker:
-  - platform: ping
-    hosts:
-      apple_watch: 192.168.1.XXX  # Replace with your watch's IP
-
 shell_command:
   git_pull_config: "git -C /config pull --rebase"
 

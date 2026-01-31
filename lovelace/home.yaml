@@ -3,7 +3,7 @@ views:
     path: home-new
     icon: mdi:home-outline
     type: sections
-    max_columns: 3
+    max_columns: 2
     sections:
       - type: grid
         cards:
@@ -21,51 +21,48 @@ views:
                 tap_action:
                   action: call-service
                   service: script.goodbye
-      - type: grid
-        cards:
           - type: entities
-            title: Living Room
+            title: Living Room Lights
             icon: mdi:sofa
             show_header_toggle: false
             entities:
               - entity: light.living_room
               - entity: light.living_room_light_floor
-              - entity: media_player.living_room
-              - entity: media_player.apple_tv
-      - type: grid
-        cards:
           - type: entities
-            title: Bedroom
+            title: Bedroom Lights
             icon: mdi:bed
             show_header_toggle: false
             entities:
               - entity: light.bedroom_light
               - entity: light.bedside_light
               - entity: light.elgato_key_light_808f
-              - entity: media_player.bedroom
-      - type: grid
-        cards:
           - type: entities
-            title: Hallway
+            title: Hallway Lights
             icon: mdi:door
             show_header_toggle: false
             entities:
               - entity: light.hallway
-      - type: grid
-        cards:
           - type: entities
-            title: Kitchen
+            title: Kitchen Lights
             icon: mdi:stove
             show_header_toggle: false
             entities:
               - entity: light.kitchen_light
-              - entity: media_player.kitchen
-      - type: grid
-        cards:
           - type: entities
-            title: Bathroom
+            title: Bathroom Lights
             icon: mdi:shower
             show_header_toggle: false
             entities:
               - entity: light.bathroom_light
-              - entity: media_player.bathroom
+      - type: grid
+        cards:
+          - type: media-control
+            entity: media_player.living_room
+          - type: media-control
+            entity: media_player.apple_tv
+          - type: media-control
+            entity: media_player.bedroom
+          - type: media-control
+            entity: media_player.kitchen
+          - type: media-control
+            entity: media_player.bathroom
