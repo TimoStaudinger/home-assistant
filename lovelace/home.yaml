@@ -2,11 +2,10 @@ views:
   - title: Home New
     path: home-new
     icon: mdi:home-outline
-    type: panel
-    cards:
+    type: sections
+    max_columns: 3
+    sections:
       - type: grid
-        columns: 3
-        square: false
         cards:
           - type: entities
             title: Actions
@@ -18,6 +17,8 @@ views:
               - entity: script.goodbye
                 name: I'm Leaving
                 icon: mdi:home-export-outline
+      - type: grid
+        cards:
           - type: entities
             title: Living Room
             icon: mdi:sofa
@@ -27,6 +28,8 @@ views:
               - entity: light.living_room_light_floor
               - entity: media_player.living_room
               - entity: media_player.apple_tv
+      - type: grid
+        cards:
           - type: entities
             title: Bedroom
             icon: mdi:bed
@@ -36,12 +39,16 @@ views:
               - entity: light.bedside_light
               - entity: light.elgato_key_light_808f
               - entity: media_player.bedroom
+      - type: grid
+        cards:
           - type: entities
             title: Hallway
             icon: mdi:door
             show_header_toggle: false
             entities:
               - entity: light.hallway
+      - type: grid
+        cards:
           - type: entities
             title: Kitchen
             icon: mdi:stove
@@ -49,6 +56,8 @@ views:
             entities:
               - entity: light.kitchen_light
               - entity: media_player.kitchen
+      - type: grid
+        cards:
           - type: entities
             title: Bathroom
             icon: mdi:shower
