@@ -2,4 +2,19 @@ views:
   - title: Home New
     path: home-new
     icon: mdi:home-outline
-    cards: []
+    cards:
+      - type: vertical-stack
+        title: Living Room
+        cards: []
+      - type: vertical-stack
+        title: Bedroom
+        cards: []
+      - type: vertical-stack
+        title: Hallway
+        cards: []
+      - type: vertical-stack
+        title: Kitchen
+        cards: []
+      - type: vertical-stack
+        title: Bathroom
+        cards: []
