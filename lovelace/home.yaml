@@ -46,13 +46,28 @@ views:
               - entity: light.bathroom_light
       - type: grid
         cards:
-          - type: media-control
-            entity: media_player.living_room
-          - type: media-control
+          - type: tile
             entity: media_player.apple_tv
-          - type: media-control
+            features:
+              - type: media-player-play-pause
+              - type: media-player-volume-slider
+          - type: tile
+            entity: media_player.living_room
+            features:
+              - type: media-player-play-pause
+              - type: media-player-volume-slider
+          - type: tile
             entity: media_player.bedroom
-          - type: media-control
+            features:
+              - type: media-player-play-pause
+              - type: media-player-volume-slider
+          - type: tile
             entity: media_player.kitchen
-          - type: media-control
+            features:
+              - type: media-player-play-pause
+              - type: media-player-volume-slider
+          - type: tile
             entity: media_player.bathroom
+            features:
+              - type: media-player-play-pause
+              - type: media-player-volume-slider
