@@ -3,7 +3,7 @@ default_config:
 lovelace:
   mode: yaml
   dashboards:
-    home:
+    lovelace-πhome:
       mode: yaml
       filename: lovelace/home.yaml
       title: Home
