@@ -2,25 +2,22 @@ views:
   - title: Home New
     path: home-new
     icon: mdi:home-outline
+    type: panel
     cards:
       - type: grid
         columns: 3
         square: false
         cards:
-          - type: vertical-stack
-            cards:
-              - type: button
+          - type: entities
+            title: Actions
+            show_header_toggle: false
+            entities:
+              - entity: script.hello
                 name: I'm Home
                 icon: mdi:home-import-outline
-                tap_action:
-                  action: call-service
-                  service: script.hello
-              - type: button
+              - entity: script.goodbye
                 name: I'm Leaving
                 icon: mdi:home-export-outline
-                tap_action:
-                  action: call-service
-                  service: script.goodbye
           - type: entities
             title: Living Room
             icon: mdi:sofa
