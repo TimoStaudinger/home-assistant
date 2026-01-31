@@ -1,5 +1,5 @@
-- id: home
-  name: I'm Home
+- id: '1738341748000'
+  name: Home
   entities:
     light.bedroom_light:
       state: on
@@ -23,15 +23,15 @@
       state: on
       brightness: 128
 
-- id: leaving
-  name: I'm Leaving
+- id: '1738341748001'
+  name: Leaving
   entities:
     light.hallway:
       state: on
       brightness: 255
 
-- id: gone
-  name: I'm Gone
+- id: '1738341748002'
+  name: Gone
   entities:
     light.bedroom_light:
       state: off
