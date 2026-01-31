@@ -50,11 +50,8 @@ views:
             show_header_toggle: false
             entities:
               - entity: person.timo
-          - type: custom:mini-media-player
+          - type: media-control
             entity: media_player.apple_tv
-            artwork: cover
-            hide:
-              volume: true
           - type: entities
             title: Media
             show_header_toggle: false
