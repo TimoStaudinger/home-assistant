@@ -7,16 +7,20 @@ views:
     sections:
       - type: grid
         cards:
-          - type: entities
-            title: Actions
-            show_header_toggle: false
-            entities:
-              - entity: script.hello
+          - type: horizontal-stack
+            cards:
+              - type: button
                 name: I'm Home
                 icon: mdi:home-import-outline
-              - entity: script.goodbye
+                tap_action:
+                  action: call-service
+                  service: script.hello
+              - type: button
                 name: I'm Leaving
                 icon: mdi:home-export-outline
+                tap_action:
+                  action: call-service
+                  service: script.goodbye
       - type: grid
         cards:
           - type: entities

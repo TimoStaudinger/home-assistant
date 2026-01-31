@@ -8,6 +8,7 @@ frontend:
 
 lovelace:
   mode: yaml
+  resources: []
   dashboards:
     lovelace-home:
       mode: yaml
