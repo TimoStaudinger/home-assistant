@@ -3,34 +3,40 @@ views:
     path: home-new
     icon: mdi:home-outline
     cards:
-      - type: vertical-stack
-        title: Living Room
+      - type: grid
+        columns: 3
+        square: false
         cards:
-          - type: light
-            entity: light.living_room
-          - type: light
-            entity: light.living_room_light_floor
-      - type: vertical-stack
-        title: Bedroom
-        cards:
-          - type: light
-            entity: light.bedroom_light
-          - type: light
-            entity: light.bedside_light
-          - type: light
-            entity: light.elgato_key_light_808f
-      - type: vertical-stack
-        title: Hallway
-        cards:
-          - type: light
-            entity: light.hallway
-      - type: vertical-stack
-        title: Kitchen
-        cards:
-          - type: light
-            entity: light.kitchen_light
-      - type: vertical-stack
-        title: Bathroom
-        cards:
-          - type: light
-            entity: light.bathroom_light
+          - type: entities
+            title: Living Room
+            icon: mdi:sofa
+            show_header_toggle: false
+            entities:
+              - entity: light.living_room
+              - entity: light.living_room_light_floor
+          - type: entities
+            title: Bedroom
+            icon: mdi:bed
+            show_header_toggle: false
+            entities:
+              - entity: light.bedroom_light
+              - entity: light.bedside_light
+              - entity: light.elgato_key_light_808f
+          - type: entities
+            title: Hallway
+            icon: mdi:door
+            show_header_toggle: false
+            entities:
+              - entity: light.hallway
+          - type: entities
+            title: Kitchen
+            icon: mdi:stove
+            show_header_toggle: false
+            entities:
+              - entity: light.kitchen_light
+          - type: entities
+            title: Bathroom
+            icon: mdi:shower
+            show_header_toggle: false
+            entities:
+              - entity: light.bathroom_light
