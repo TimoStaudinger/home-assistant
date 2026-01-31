@@ -1,18 +1,12 @@
-
-# Loads default set of integrations. Do not remove.
 default_config:
-
-# Load frontend themes from the themes folder
-frontend:
-  themes: !include_dir_merge_named themes
 
 lovelace:
   mode: yaml
   dashboards:
-    lovelace-home:
+    home:
       mode: yaml
       filename: lovelace/home.yaml
-      title: Home New
+      title: Home
       icon: mdi:home-outline
 
 homekit:
