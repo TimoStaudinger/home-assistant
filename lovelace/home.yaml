@@ -4,11 +4,27 @@ views:
     icon: mdi:home-outline
     type: panel
     cards:
-      - type: grid
-        columns: 3
-        square: false
+      - type: vertical-stack
         cards:
-          - type: entities
+          - type: horizontal-stack
+            cards:
+              - type: button
+                name: I'm Home
+                icon: mdi:home-import-outline
+                tap_action:
+                  action: call-service
+                  service: script.hello
+              - type: button
+                name: I'm Leaving
+                icon: mdi:home-export-outline
+                tap_action:
+                  action: call-service
+                  service: script.goodbye
+          - type: grid
+            columns: 3
+            square: false
+            cards:
+              - type: entities
             title: Living Room
             icon: mdi:sofa
             show_header_toggle: false
