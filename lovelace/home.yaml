@@ -4,6 +4,8 @@ views:
     icon: mdi:home-outline
     type: sections
     max_columns: 2
+    kiosk_mode:
+      hide_header: true
     sections:
       - type: grid
         cards:
