@@ -11,13 +11,13 @@ views:
             cards:
               - type: button
                 name: I'm Home
-                icon: mdi:home-import-outline
+                show_icon: false
                 tap_action:
                   action: call-service
                   service: script.hello
               - type: button
                 name: I'm Leaving
-                icon: mdi:home-export-outline
+                show_icon: false
                 tap_action:
                   action: call-service
                   service: script.goodbye
