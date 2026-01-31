@@ -7,7 +7,7 @@ frontend:
   themes: !include_dir_merge_named themes
 
 shell_command:
-  git_pull_config: "git -C /config pull --rebase"
+  git_pull_config: "GIT_SSH_COMMAND='ssh -i ~/.ssh/id_ed25519 -o UserKnownHostsFile=~/.ssh/known_hosts' git -C /config pull --rebase"
 
 automation: !include automations.yaml
 script: !include scripts.yaml
