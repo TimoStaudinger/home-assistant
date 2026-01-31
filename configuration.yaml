@@ -24,5 +24,3 @@ scene: !include scenes.yaml
 
 logger:
   default: info
-  logs:
-    homeassistant.components.shell_command: debug
