@@ -16,7 +16,7 @@ views:
               - entity: light.living_room
               - entity: light.living_room_light_floor
               - entity: media_player.living_room
-              - entity: media_player.living_room_2
+              - entity: media_player.apple_tv
           - type: entities
             title: Bedroom
             icon: mdi:bed
