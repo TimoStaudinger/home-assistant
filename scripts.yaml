@@ -32,12 +32,11 @@ git_pull_and_reload:
   alias: Git Pull & Reload YAML
   sequence:
   - service: shell_command.git_pull_config
-    continue_on_error: true
     response_variable: git_output
   - service: system_log.write
     data:
       message: "Git pull output: {{ git_output }}"
-      level: warning
+      level: info
   - delay: "00:00:02"
   - service: homeassistant.reload_all
   mode: single
