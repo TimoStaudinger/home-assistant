@@ -16,6 +16,12 @@ lovelace:
       title: Home New
       icon: mdi:home-outline
 
+homekit:
+  filter:
+    include_entities:
+      - script.hello
+      - script.goodbye
+
 shell_command:
   git_pull_config: "git -C /config pull --rebase"
 
