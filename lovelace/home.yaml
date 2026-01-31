@@ -22,14 +22,14 @@ views:
                   action: call-service
                   service: script.goodbye
           - type: entities
-            title: Living Room Lights
+            title: Living Room
             icon: mdi:sofa
             show_header_toggle: false
             entities:
               - entity: light.living_room
               - entity: light.living_room_light_floor
           - type: entities
-            title: Bedroom Lights
+            title: Bedroom
             icon: mdi:bed
             show_header_toggle: false
             entities:
@@ -37,19 +37,19 @@ views:
               - entity: light.bedside_light
               - entity: light.elgato_key_light_808f
           - type: entities
-            title: Hallway Lights
+            title: Hallway
             icon: mdi:door
             show_header_toggle: false
             entities:
               - entity: light.hallway
           - type: entities
-            title: Kitchen Lights
+            title: Kitchen
             icon: mdi:stove
             show_header_toggle: false
             entities:
               - entity: light.kitchen_light
           - type: entities
-            title: Bathroom Lights
+            title: Bathroom
             icon: mdi:shower
             show_header_toggle: false
             entities:
