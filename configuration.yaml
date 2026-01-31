@@ -13,7 +13,7 @@ lovelace:
       mode: yaml
       filename: lovelace/home.yaml
       title: Home
-      icon: mdi:home
+      icon: mdi:home-outline
 
 shell_command:
   git_pull_config: "git -C /config pull --rebase"
