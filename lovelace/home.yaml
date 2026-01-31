@@ -1,5 +1,3 @@
-kiosk_mode:
-  hide_header: true
 views:
   - title: Home
     path: home
