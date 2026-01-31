@@ -15,6 +15,8 @@ views:
             entities:
               - entity: light.living_room
               - entity: light.living_room_light_floor
+              - entity: media_player.living_room
+              - entity: media_player.living_room_2
           - type: entities
             title: Bedroom
             icon: mdi:bed
@@ -23,6 +25,7 @@ views:
               - entity: light.bedroom_light
               - entity: light.bedside_light
               - entity: light.elgato_key_light_808f
+              - entity: media_player.bedroom
           - type: entities
             title: Hallway
             icon: mdi:door
@@ -35,9 +38,11 @@ views:
             show_header_toggle: false
             entities:
               - entity: light.kitchen_light
+              - entity: media_player.kitchen
           - type: entities
             title: Bathroom
             icon: mdi:shower
             show_header_toggle: false
             entities:
               - entity: light.bathroom_light
+              - entity: media_player.bathroom
