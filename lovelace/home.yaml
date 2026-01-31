@@ -2,8 +2,11 @@ views:
   - title: Home New
     path: home-new
     icon: mdi:home-outline
+    type: sidebar
     cards:
-      - type: horizontal-stack
+      - type: grid
+        columns: 2
+        square: false
         cards:
           - type: button
             name: I'm Home
