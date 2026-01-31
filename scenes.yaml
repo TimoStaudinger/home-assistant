@@ -1,4 +1,4 @@
-- id: hello
+- id: home
   name: I'm Home
   entities:
     light.bedroom_light:
@@ -30,7 +30,7 @@
       state: on
       brightness: 255
 
-- id: goodbye
+- id: gone
   name: I'm Gone
   entities:
     light.bedroom_light:

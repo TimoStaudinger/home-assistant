@@ -4,7 +4,7 @@ goodbye:
   - service: scene.turn_on
     metadata: {}
     target:
-      entity_id: scene.i_m_leaving
+      entity_id: scene.leaving
   - delay:
       hours: 0
       minutes: 5
@@ -13,7 +13,7 @@ goodbye:
   - service: scene.turn_on
     metadata: {}
     target:
-      entity_id: scene.i_m_gone
+      entity_id: scene.gone
   mode: single
 hello:
   alias: Hello
@@ -26,7 +26,7 @@ hello:
   - service: scene.turn_on
     metadata: {}
     target:
-      entity_id: scene.i_m_home
+      entity_id: scene.home
   mode: single
 git_pull_and_reload:
   alias: Git Pull & Reload YAML
