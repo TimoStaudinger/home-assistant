@@ -9,7 +9,7 @@
       brightness: 128
     light.hallway:
       state: on
-      brightness: 204
+      brightness: 128
     light.kitchen_light:
       state: on
       brightness: 255
