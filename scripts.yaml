@@ -10,6 +10,11 @@ goodbye:
 #      minutes: 5
 #      seconds: 0
 #      milliseconds: 0
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.home_state
+    data:
+      option: Away
   - service: scene.turn_on
     metadata: {}
     target:
@@ -23,6 +28,11 @@ hello:
     data: {}
     target:
       entity_id: script.goodbye
+  - service: input_select.select_option
+    target:
+      entity_id: input_select.home_state
+    data:
+      option: Home
   - service: scene.turn_on
     metadata: {}
     target:

@@ -21,6 +21,14 @@ homekit:
 shell_command:
   git_pull_config: "git -C /config pull --rebase"
 
+input_select:
+  home_state:
+    name: Home State
+    options:
+      - Home
+      - Away
+    initial: Away
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
