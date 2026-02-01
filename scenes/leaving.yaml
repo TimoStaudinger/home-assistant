@@ -1,0 +1,6 @@
+- id: '1738341748001'
+  name: Leaving
+  entities:
+    light.hallway:
+      state: on
+      brightness: 255

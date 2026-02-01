@@ -1,0 +1,16 @@
+hello:
+  alias: Hello
+  sequence:
+  - condition: state
+    entity_id: input_boolean.guest_mode
+    state: "off"
+  - service: script.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: script.goodbye
+  - service: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.home
+  mode: single

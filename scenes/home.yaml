@@ -22,28 +22,3 @@
     light.living_room_light_floor:
       state: on
       brightness: 128
-
-- id: '1738341748001'
-  name: Leaving
-  entities:
-    light.hallway:
-      state: on
-      brightness: 255
-
-- id: '1738341748002'
-  name: Gone
-  entities:
-    light.bedroom_light:
-      state: off
-    light.living_room:
-      state: off
-    light.hallway:
-      state: off
-    light.kitchen_light:
-      state: off
-    light.bathroom_light:
-      state: off
-    light.bedside_light:
-      state: off
-    light.living_room_light_floor:
-      state: off
