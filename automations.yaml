@@ -1,1 +1,10 @@
-[]
+- id: guest_mode_on
+  alias: Guest Mode - Turn On Home Scene
+  trigger:
+    - platform: state
+      entity_id: input_boolean.guest_mode
+      to: "on"
+  action:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.home

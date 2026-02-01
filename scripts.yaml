@@ -10,6 +10,9 @@ goodbye:
 #      minutes: 5
 #      seconds: 0
 #      milliseconds: 0
+  - condition: state
+    entity_id: input_boolean.guest_mode
+    state: "off"
   - service: scene.turn_on
     metadata: {}
     target:
@@ -18,6 +21,9 @@ goodbye:
 hello:
   alias: Hello
   sequence:
+  - condition: state
+    entity_id: input_boolean.guest_mode
+    state: "off"
   - service: script.turn_off
     metadata: {}
     data: {}

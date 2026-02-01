@@ -21,6 +21,12 @@ homekit:
 shell_command:
   git_pull_config: "git -C /config pull --rebase"
 
+input_boolean:
+  guest_mode:
+    name: Guest Mode
+    initial: false
+    icon: mdi:account-multiple
+
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
