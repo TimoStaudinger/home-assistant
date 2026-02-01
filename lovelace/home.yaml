@@ -7,10 +7,6 @@ views:
     sections:
       - type: grid
         cards:
-          - type: entities
-            show_header_toggle: false
-            entities:
-              - entity: input_select.home_state
           - type: horizontal-stack
             cards:
               - type: button
