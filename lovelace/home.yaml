@@ -7,20 +7,6 @@ views:
     sections:
       - type: grid
         cards:
-          - type: horizontal-stack
-            cards:
-              - type: button
-                name: I'm Home
-                show_icon: false
-                tap_action:
-                  action: call-service
-                  service: script.hello
-              - type: button
-                name: I'm Leaving
-                show_icon: false
-                tap_action:
-                  action: call-service
-                  service: script.goodbye
           - type: entities
             title: Living Room
             icon: mdi:sofa
@@ -51,6 +37,18 @@ views:
             entities:
               - entity: person.timo
               - entity: input_boolean.guest_mode
+              - type: button
+                name: I'm Home
+                show_icon: false
+                tap_action:
+                  action: call-service
+                  service: script.hello
+              - type: button
+                name: I'm Leaving
+                show_icon: false
+                tap_action:
+                  action: call-service
+                  service: script.goodbye
           - type: media-control
             entity: media_player.apple_tv
           - type: entities
