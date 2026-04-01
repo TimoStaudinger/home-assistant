@@ -34,7 +34,7 @@ views:
             show_header_toggle: false
             entities:
               - entity: light.bedroom_light
-              - entity: light.bedside_light
+              - entity: light.bedroom_accent
               - entity: light.elgato_key_light_808f
           - type: entities
             title: Others
