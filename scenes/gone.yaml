@@ -3,6 +3,8 @@
   entities:
     light.bedroom_light:
       state: off
+    light.bedroom_accent:
+      state: off
     light.living_room:
       state: off
     light.hallway:

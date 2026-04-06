@@ -4,6 +4,9 @@
     light.bedroom_light:
       state: on
       brightness: 255
+    light.bedroom_accent:
+      state: on
+      brightness: 128
     light.living_room:
       state: on
       brightness: 128
