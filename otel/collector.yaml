@@ -1,0 +1,135 @@
+# OpenTelemetry Collector — Home Assistant + Raspberry Pi → Dynatrace
+#
+# Deployed to /config/otel/collector.yaml by script.git_pull_and_reload and
+# mounted read-only into the otel-collector add-on at
+# /homeassistant/otel/collector.yaml.
+#
+# Environment supplied by the add-on's run.sh:
+#   DT_ENDPOINT       https://<env-id>.live.dynatrace.com/api/v2/otlp
+#   DT_API_TOKEN      access token — metrics.ingest + logs.ingest
+#   SUPERVISOR_TOKEN  injected by Supervisor; authenticates the HA API scrape
+
+receivers:
+  # Every Home Assistant entity, labels preserved as Dynatrace dimensions.
+  # Reached through the Supervisor proxy, so no long-lived access token is
+  # needed — homeassistant_api: true in the add-on manifest grants this.
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: home-assistant
+          scrape_interval: 30s
+          metrics_path: /core/api/prometheus
+          static_configs:
+            - targets: ["supervisor"]
+          authorization:
+            type: Bearer
+            credentials: ${env:SUPERVISOR_TOKEN}
+
+  # Raspberry Pi host health. procfs is not namespaced for these scrapers, so
+  # the numbers are the Pi's, not the add-on container's.
+  hostmetrics:
+    collection_interval: 30s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+      load:
+      memory:
+        metrics:
+          system.memory.utilization:
+            enabled: true
+      disk:
+      network:
+      paging:
+      processes:
+      filesystem:
+        include_mount_points:
+          mount_points: ["/", "/data"]
+          match_type: strict
+
+  # remote_logger (HACS) pushes HA logs, state changes and service calls here.
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
+processors:
+  # The Pi has limited headroom — refuse work before the OOM killer does.
+  memory_limiter:
+    check_interval: 5s
+    limit_mib: 192
+    spike_limit_mib: 48
+
+  # Dynatrace ingests delta temporality only — cumulative sums are dropped on
+  # arrival, not converted. Both scrape receivers emit cumulative, so every
+  # counter (network/disk I/O, CPU time) depends on this processor.
+  cumulativetodelta:
+
+  batch:
+    send_batch_size: 512
+    timeout: 10s
+
+  resource/ha:
+    attributes:
+      - key: service.name
+        value: home-assistant
+        action: insert
+      - key: host.name
+        value: homeassistant
+        action: upsert
+      - key: deployment.environment
+        value: home
+        action: insert
+
+  resource/host:
+    attributes:
+      - key: host.name
+        value: homeassistant
+        action: upsert
+      - key: host.type
+        value: raspberry-pi-4
+        action: insert
+      - key: deployment.environment
+        value: home
+        action: insert
+
+exporters:
+  # otlphttp appends /v1/metrics and /v1/logs to the endpoint, and defaults to
+  # binary protobuf — Dynatrace rejects JSON and does not accept gRPC.
+  otlphttp/dynatrace:
+    endpoint: ${env:DT_ENDPOINT}
+    headers:
+      Authorization: "Api-Token ${env:DT_API_TOKEN}"
+    compression: gzip
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 60s
+      max_elapsed_time: 300s
+
+extensions:
+  health_check:
+    endpoint: 0.0.0.0:13133
+
+service:
+  extensions: [health_check]
+  pipelines:
+    metrics/home-assistant:
+      receivers: [prometheus]
+      processors: [memory_limiter, cumulativetodelta, resource/ha, batch]
+      exporters: [otlphttp/dynatrace]
+
+    metrics/host:
+      receivers: [hostmetrics]
+      processors: [memory_limiter, cumulativetodelta, resource/host, batch]
+      exporters: [otlphttp/dynatrace]
+
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, resource/ha, batch]
+      exporters: [otlphttp/dynatrace]
+
+  telemetry:
+    logs:
+      level: info

@@ -7,6 +7,11 @@ git_pull_and_reload:
     data:
       message: "Git pull output: {{ git_output }}"
       level: info
+  - service: script.dynatrace_event
+    data:
+      title: Home Assistant config deployed
+      event_type: CUSTOM_DEPLOYMENT
+      detail: "{{ git_output.stdout | default('') }}"
   - delay: "00:00:02"
   - service: homeassistant.reload_all
   mode: single

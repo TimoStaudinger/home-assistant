@@ -1,0 +1,41 @@
+# Local add-on manifest. This directory is NOT deployed by git_pull_and_reload —
+# it must be copied to /addons on the Pi. See ../README.md.
+name: OpenTelemetry Collector
+version: "0.1.0"
+slug: otel_collector
+description: Ships Home Assistant and Raspberry Pi telemetry to Dynatrace over OTLP
+url: https://github.com/Dynatrace/dynatrace-otel-collector
+arch:
+  - aarch64
+
+# Start before Home Assistant so the OTLP receiver is listening by the time
+# remote_logger comes up and starts pushing.
+startup: services
+boot: auto
+init: false
+
+# Grants SUPERVISOR_TOKEN and access to http://supervisor/core/api, which is
+# how the collector scrapes /api/prometheus without a long-lived token.
+homeassistant_api: true
+
+map:
+  - type: homeassistant_config
+    read_only: true
+    path: /homeassistant
+
+ports:
+  4318/tcp: 4318
+  13133/tcp: 13133
+ports_description:
+  4318/tcp: OTLP/HTTP receiver — remote_logger posts here
+  13133/tcp: Collector health check
+
+options:
+  dt_endpoint: ""
+  dt_api_token: ""
+  log_level: info
+
+schema:
+  dt_endpoint: str
+  dt_api_token: password
+  log_level: list(debug|info|warn|error)
