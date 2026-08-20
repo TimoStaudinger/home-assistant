@@ -7,7 +7,9 @@ git_pull_and_reload:
     data:
       message: "Git pull output: {{ git_output }}"
       level: info
+  # Best-effort: a Dynatrace outage must never block a deploy.
   - service: script.dynatrace_event
+    continue_on_error: true
     data:
       title: Home Assistant config deployed
       event_type: CUSTOM_DEPLOYMENT
