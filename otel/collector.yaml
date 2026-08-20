@@ -5,10 +5,11 @@
 # /homeassistant/otel/collector.yaml.
 #
 # Environment supplied by the add-on's run.sh:
-#   DT_ENDPOINT       https://<env-id>.apps.dynatrace.com/platform/otlp
-#                     (platform token) or https://<env-id>.live.dynatrace.com/api/v2/otlp (classic)
-#   DT_AUTH_HEADER    "Bearer <platform-token>" or "Api-Token <classic-token>",
-#                     composed by the add-on's run.sh
+#   DT_ENDPOINT       https://<env-id>.live.dynatrace.com/api/v2/otlp — the classic
+#                     OTLP endpoint accepts BOTH token types (drop .apps from the host)
+#   DT_AUTH_HEADER    "Bearer <platform-token>" (scopes openpipeline:metrics:ingest +
+#                     openpipeline:logs:ingest) or "Api-Token <classic-token>"
+#                     (metrics.ingest + logs.ingest), composed by the add-on's run.sh
 #   SUPERVISOR_TOKEN  injected by Supervisor; authenticates the HA API scrape
 
 receivers:

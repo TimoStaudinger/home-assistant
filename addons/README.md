@@ -22,17 +22,21 @@ straight at the tenant.
 
 Two token types work; the add-on's `dt_auth_scheme` option selects between them.
 
+Both token types authenticate against the same endpoint —
+`https://<env-id>.live.dynatrace.com/api/v2/otlp` (drop `.apps` from the UI
+host; the `.apps` gateway 403s classic API paths).
+
 **Platform token (default, `Bearer`)** — per-user, no admin permission needed.
 Create it under **Account Management → My platform tokens** (or search
-"platform tokens" in the product). Select the ingest/write scopes offered in
-the picker (search for "ingest"). Endpoint for the add-on:
-`https://<env-id>.apps.dynatrace.com/platform/otlp`. If a scope is missing,
-the collector log's 403 body names it exactly — add it to the token and
-restart the add-on.
+"platform tokens" in the product) with scopes:
+- `openpipeline:metrics:ingest`
+- `openpipeline:logs:ingest`
+
+If a scope is missing, the collector log's 403 body names it exactly — fix the
+token and restart the add-on.
 
 **Classic access token (`Api-Token`)** — needs permission for the classic
-*Access Tokens* app. Scopes `metrics.ingest` + `logs.ingest`; endpoint
-`https://<env-id>.live.dynatrace.com/api/v2/otlp` (drop `.apps`).
+*Access Tokens* app. Scopes `metrics.ingest` + `logs.ingest`.
 
 Either way the token is shown **once** and goes only into the add-on's
 Configuration tab — never into this repo, and not into Home Assistant.

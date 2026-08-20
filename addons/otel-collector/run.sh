@@ -9,7 +9,7 @@ DT_AUTH_SCHEME="$(bashio::config 'dt_auth_scheme')"
 LOG_LEVEL="$(bashio::config 'log_level')"
 
 if bashio::var.is_empty "${DT_ENDPOINT}"; then
-    bashio::exit.nok "dt_endpoint is not set — add your tenant's OTLP base URL (https://<env-id>.apps.dynatrace.com/platform/otlp for platform tokens) in the add-on Configuration tab."
+    bashio::exit.nok "dt_endpoint is not set — add your tenant's OTLP base URL (https://<env-id>.live.dynatrace.com/api/v2/otlp) in the add-on Configuration tab."
 fi
 
 if bashio::var.is_empty "${DT_API_TOKEN}"; then
