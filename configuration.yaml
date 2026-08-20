@@ -32,25 +32,32 @@ prometheus:
       # Always empty or unavailable; pure noise.
       - sensor.*_color_options
 
-# Dynatrace event ingest, used for deploy markers. Requires events.ingest scope.
-# dynatrace_events_url and dynatrace_auth_header live in secrets.yaml (untracked).
+# Deploy markers, posted to the local OTel collector as an OTLP/JSON log
+# record. HA Core runs host-network on HAOS, so localhost:4318 reaches the
+# add-on's mapped port. No Dynatrace credential lives in HA — the collector
+# attaches auth on export.
 rest_command:
   dynatrace_event:
-    url: !secret dynatrace_events_url
+    url: "http://localhost:4318/v1/logs"
     method: POST
-    headers:
-      Authorization: !secret dynatrace_auth_header
     content_type: "application/json"
-    # to_json quotes and escapes — detail carries raw command output, which
-    # would otherwise break the body on a quote or newline.
+    # to_json quotes and escapes — detail carries raw command output.
     payload: >-
       {
-        "eventType": {{ event_type | default('CUSTOM_INFO') | to_json }},
-        "title": {{ title | to_json }},
-        "properties": {
-          "source": "home-assistant",
-          "detail": {{ detail | default('') | string | to_json }}
-        }
+        "resourceLogs": [{
+          "resource": {"attributes": [
+            {"key": "service.name", "value": {"stringValue": "home-assistant"}}
+          ]},
+          "scopeLogs": [{"logRecords": [{
+            "timeUnixNano": "{{ (now().timestamp() * 1000000000) | int }}",
+            "severityText": "INFO",
+            "body": {"stringValue": {{ title | to_json }}},
+            "attributes": [
+              {"key": "event.type", "value": {"stringValue": {{ event_type | default('CUSTOM_INFO') | to_json }}}},
+              {"key": "event.detail", "value": {"stringValue": {{ detail | default('') | string | to_json }}}}
+            ]
+          }]}]
+        }]
       }
 
 input_boolean:

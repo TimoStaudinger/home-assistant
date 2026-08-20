@@ -20,19 +20,22 @@ straight at the tenant.
 
 ## 1. Create the Dynatrace token
 
-In your Dynatrace environment's UI:
+Two token types work; the add-on's `dt_auth_scheme` option selects between them.
 
-1. Open **Settings → Platform → Access tokens**, or jump straight to the Tokens
-   app from the app switcher.
-2. **Generate new token**. Name it something like `home-assistant-otlp`.
-3. Select exactly these scopes:
-   - `metrics.ingest` — the Prometheus scrape and host metrics
-   - `logs.ingest` — everything `remote_logger` sends
-   - `events.ingest` — deploy markers from `script.dynatrace_event`
-4. Generate, then copy the value. It starts `dt0c01.` and is shown **once**.
+**Platform token (default, `Bearer`)** — per-user, no admin permission needed.
+Create it under **Account Management → My platform tokens** (or search
+"platform tokens" in the product). Select the ingest/write scopes offered in
+the picker (search for "ingest"). Endpoint for the add-on:
+`https://<env-id>.apps.dynatrace.com/platform/otlp`. If a scope is missing,
+the collector log's 403 body names it exactly — add it to the token and
+restart the add-on.
 
-Keep it out of this repo — it goes into the add-on's Configuration tab and into
-`secrets.yaml`, both of which are untracked.
+**Classic access token (`Api-Token`)** — needs permission for the classic
+*Access Tokens* app. Scopes `metrics.ingest` + `logs.ingest`; endpoint
+`https://<env-id>.live.dynatrace.com/api/v2/otlp` (drop `.apps`).
+
+Either way the token is shown **once** and goes only into the add-on's
+Configuration tab — never into this repo, and not into Home Assistant.
 
 ## 2. Install the collector add-on
 
@@ -47,10 +50,10 @@ and so is not covered by `script.git_pull_and_reload`. Copy it manually:
    appears under *Local add-ons*.
 4. Install it. The first build takes a few minutes on a Pi 4 — it pulls the
    collector image and Home Assistant's aarch64 base.
-5. On the **Configuration** tab, paste the token into `dt_api_token` and set
-   `dt_endpoint` to your tenant's OTLP base URL:
-   `https://<env-id>.live.dynatrace.com/api/v2/otlp` (drop `.apps`). The
-   tenant URL lives only here and in `secrets.yaml`, never in git.
+5. On the **Configuration** tab, paste the token into `dt_api_token`, set
+   `dt_endpoint` to the OTLP base URL for your token type (see step 1), and
+   leave `dt_auth_scheme: Bearer` for a platform token. The tenant URL lives
+   only here, never in git.
 6. Start it, and enable **Start on boot** and **Watchdog**.
 
 The collector reads its pipeline config from `/config/otel/collector.yaml`,
@@ -59,18 +62,12 @@ normal git flow, and only the token lives outside the repo.
 
 ## 3. Enable the Home Assistant side
 
-`prometheus:` and `rest_command:` are already in `configuration.yaml`. Add the
-event-ingest secrets to `/config/secrets.yaml` on the Pi:
+`prometheus:` and `rest_command:` are already in `configuration.yaml` and need
+no secrets: deploy markers go to the local collector as OTLP/JSON log records
+(`http://localhost:4318/v1/logs` — HA Core is host-networked on HAOS), and the
+collector attaches auth on export.
 
-```yaml
-dynatrace_events_url: "https://<env-id>.live.dynatrace.com/api/v2/events/ingest"
-dynatrace_auth_header: "Api-Token dt0c01.YOUR_TOKEN_HERE"
-```
-
-Note the ingest host drops `.apps` — the UI URL's `.apps` form returns 404
-for API paths.
-
-Then install `remote_logger` via HACS:
+Install `remote_logger` via HACS:
 
 1. **HACS → Integrations → ⋮ → Custom repositories**, add
    `https://github.com/rhizomatics/remote_logger` as an Integration.
@@ -87,8 +84,8 @@ Then install `remote_logger` via HACS:
 - In Dynatrace, `fetch logs | filter service.name == "home-assistant"` and
   `timeseries avg(system.cpu.utilization)` should both return rows within a
   couple of minutes.
-- Deploy markers: run `script.git_pull_and_reload` and look for a
-  `CUSTOM_DEPLOYMENT` event.
+- Deploy markers: run `script.git_pull_and_reload`, then
+  `fetch logs | filter event.type == "CUSTOM_DEPLOYMENT"`.
 
 ## Notes
 

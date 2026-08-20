@@ -33,9 +33,13 @@ ports_description:
 options:
   dt_endpoint: ""
   dt_api_token: ""
+  dt_auth_scheme: Bearer
   log_level: info
 
 schema:
   dt_endpoint: str
   dt_api_token: password
+  # Bearer for platform tokens (dt0s16, /platform/otlp endpoint),
+  # Api-Token for classic access tokens (dt0c01, /api/v2/otlp endpoint).
+  dt_auth_scheme: list(Bearer|Api-Token)
   log_level: list(debug|info|warn|error)

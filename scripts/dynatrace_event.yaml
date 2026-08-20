@@ -1,6 +1,6 @@
 dynatrace_event:
   alias: Send Dynatrace Event
-  description: Posts an event to Dynatrace so it annotates charts and can trigger alerts.
+  description: Posts a marker to Dynatrace as a log record via the local OTel collector.
   fields:
     title:
       description: Event title shown in Dynatrace

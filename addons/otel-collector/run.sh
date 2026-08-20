@@ -5,10 +5,11 @@ CONFIG_PATH=/homeassistant/otel/collector.yaml
 
 DT_ENDPOINT="$(bashio::config 'dt_endpoint')"
 DT_API_TOKEN="$(bashio::config 'dt_api_token')"
+DT_AUTH_SCHEME="$(bashio::config 'dt_auth_scheme')"
 LOG_LEVEL="$(bashio::config 'log_level')"
 
 if bashio::var.is_empty "${DT_ENDPOINT}"; then
-    bashio::exit.nok "dt_endpoint is not set — add your tenant's OTLP base URL (https://<env-id>.live.dynatrace.com/api/v2/otlp) in the add-on Configuration tab."
+    bashio::exit.nok "dt_endpoint is not set — add your tenant's OTLP base URL (https://<env-id>.apps.dynatrace.com/platform/otlp for platform tokens) in the add-on Configuration tab."
 fi
 
 if bashio::var.is_empty "${DT_API_TOKEN}"; then
@@ -19,11 +20,13 @@ if ! bashio::fs.file_exists "${CONFIG_PATH}"; then
     bashio::exit.nok "${CONFIG_PATH} not found — deploy it with script.git_pull_and_reload first."
 fi
 
+DT_AUTH_HEADER="${DT_AUTH_SCHEME} ${DT_API_TOKEN}"
+
 # SUPERVISOR_TOKEN is injected by Supervisor; the collector reads it via
 # ${env:SUPERVISOR_TOKEN} to authenticate the /api/prometheus scrape.
-export DT_ENDPOINT DT_API_TOKEN SUPERVISOR_TOKEN
+export DT_ENDPOINT DT_AUTH_HEADER SUPERVISOR_TOKEN
 
-bashio::log.info "Exporting to ${DT_ENDPOINT}"
+bashio::log.info "Exporting to ${DT_ENDPOINT} (${DT_AUTH_SCHEME} auth)"
 bashio::log.info "OTLP/HTTP receiver listening on :4318"
 
 exec /usr/local/bin/dynatrace-otel-collector \
